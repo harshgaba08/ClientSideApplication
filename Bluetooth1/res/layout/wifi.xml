@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#354685" >
+   
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="WiFi Client Side Application"
+        android:textStyle="bold" 
+        android:textSize="30dp"
+        android:textColor="#141f4c"
+            android:background="#ffffff" />
+    
+<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="Enter the following to get Connected"
+        android:textStyle="bold" 
+        android:textColor="#141f4c"
+            android:background="#ffffff" />
+
+    <EditText
+        android:id="@+id/port"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Port Number"
+        android:layout_marginTop="10dp"
+        
+        />
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="IP Address"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtnew"
+        android:hint="Enter Message"
+        android:layout_marginTop="10dp"
+        />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <Button
+        android:id="@+id/connect"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/btn_connection"
+        android:text="Connect"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:background="#00000000"
+        />
+    <Button
+        android:layout_weight="1"
+        android:id="@+id/clear"
+         android:drawableTop="@drawable/btn_clear"
+        android:background="#00000000"
+        android:layout_width="0dp"
+        android:textColor="#ffffff"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:textSize="20dp"/>
+    </LinearLayout>
+    <TextView
+            android:id="@+id/txt_mydevice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Server Response"
+            android:textColor="#141f4c"
+            android:background="#ffffff" />
+    <TextView
+        android:id="@+id/response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#DAEEFB"
+        
+            android:paddingBottom="1dp"
+            android:paddingTop="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtdate"
+       
+        android:textColor="#DAEEFB"
+
+        />
+    
+</LinearLayout>

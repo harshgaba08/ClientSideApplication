@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#354685" >
+
+    
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp" >
+
+        <TextView
+            android:id="@+id/txt_mydevice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Device"
+            android:textColor="#141f4c"
+            android:background="#ffffff" />
+
+        <TextView
+            android:id="@+id/txt_my_device_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_mydevice"
+            android:textColor="#DAEEFB"
+            android:paddingBottom="1dp"
+            android:paddingTop="2dp"
+            android:text="Name:-" />
+
+        <TextView
+            android:id="@+id/txt_my_device_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_my_device_name"
+            android:textColor="#DAEEFB"
+            android:text="MAC Address:-" 
+            android:paddingBottom="5dp"/>
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#141f4c"
+            android:background="#ffffff"
+           
+            android:text="Server Connected"/>
+        
+        <TextView  android:id="@+id/txt_server_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:textColor="#DAEEFB"
+			android:paddingTop="2dp"
+            android:text="Connected to:-"/>
+    </LinearLayout>
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@+id/layout1"
+    android:padding="4dp">
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Paired Devices"
+            android:textColor="#141f4c"
+            android:background="#ffffff"/>
+<ListView
+                        android:id="@+id/list_paired_devices"
+                        android:textColor="#DAEEFB"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:paddingTop="5dp" 
+                        android:paddingBottom="5dp">
+                        
+
+     </ListView>
+     
+     
+     
+     <RelativeLayout android:layout_width="fill_parent"
+         android:layout_height="wrap_content" 
+         
+            android:background="#ffffff"
+         android:orientation="horizontal">
+     
+<TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available Devices"
+            android:textColor="#141f4c"/>
+
+<Button
+    android:id="@+id/btn_refresh"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    
+    android:layout_alignParentRight="true"
+    android:background="@drawable/refresh_blue" />
+
+</RelativeLayout>
+
+    <ListView           android:textColor="#DAEEFB"
+                        android:id="@+id/list_available_devices"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp" >
+                    </ListView>
+
+    
+    </LinearLayout>
+
+</RelativeLayout>

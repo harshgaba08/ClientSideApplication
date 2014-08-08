@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Client Side Application</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="nfc">NFC</string>
+    <string name="bt">Bluetooth</string>
+    <string name="wifi">WIFI</string>
+    <string name="setting">SETTINGS</string>
+
+</resources>

@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp"
+    tools:context="${relativePackage}.${activityClass}" 
+    android:background="#273464">
+    
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_status"
+        android:text="STATUS:"
+        android:textColor="#ffffff"
+        android:background="#141f4c"
+        android:visibility="gone"/>
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Client Side Application"
+        android:textSize="20dp"
+       
+        android:gravity="center"
+        android:textColor="#141f4c"
+        android:background="#ffffff"/>
+
+   <LinearLayout android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/txt_status"
+       android:weightSum="2"
+       android:orientation="vertical">
+       
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:paddingTop="40dp"
+        android:id="@+id/layout1">
+        
+    <Button
+        android:id="@+id/button_nfc"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="200dp"
+        android:background="#00000000"
+        android:textColor="#ffffff"
+        android:drawableTop="@drawable/btn_nfc"
+        android:text="@string/nfc" />
+    
+    <Button
+        android:id="@+id/button_bt"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textColor="#ffffff"
+        android:background="#00000000"
+        android:layout_height="200dp"
+       android:drawableTop="@drawable/btn_select"
+        android:text="@string/bt" />
+
+</LinearLayout>
+<LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal">
+    
+    <Button 
+        android:layout_height="200dp"
+        android:layout_width="0dp"
+        android:textColor="#ffffff"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/btn_wifi"
+       android:background="#00000000"
+        android:id="@+id/button_wifi"
+        android:text="@string/wifi"/>
+    
+    <Button
+        android:id="@+id/button_setting"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:background="#00000000"
+        android:textColor="#ffffff"
+       android:drawableTop="@drawable/btn_setting"
+        android:layout_height="200dp"
+        android:text="@string/setting" />
+
+</LinearLayout>
+
+
+</LinearLayout>
+</RelativeLayout>
