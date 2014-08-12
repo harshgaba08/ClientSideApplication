@@ -5,7 +5,10 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcManager;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,10 +26,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	   private Button button_wifi;
 	   private Button button_setting;
 	   private TextView txt_status;
-	 
+	   NfcAdapter mNfcAdapter;
+	   Context context;
 	   private BluetoothAdapter myBluetoothAdapter;
 	   private View v;  
-
+public boolean nfcstatus;
 	   
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +38,19 @@ public class MainActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 
 		myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-		
+		 mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 		button_bt=(Button) findViewById(R.id.button_bt);
 		button_setting=(Button)findViewById(R.id.button_setting);
 		button_wifi=(Button)findViewById(R.id.button_wifi);
+		button_nfc=(Button)findViewById(R.id.button_nfc);
 		txt_status=(TextView)findViewById(R.id.txt_status);
 		button_bt.setOnClickListener(this);	
 		button_setting.setOnClickListener(this);
 		button_wifi.setOnClickListener(this);
+		button_nfc.setOnClickListener(this);
 		setBluetoothStatus();
 		checkWifiState();
+		check_nfc_status();
 	}
 
 	@Override
@@ -52,6 +59,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onResume();
 		setBluetoothStatus();
 		checkWifiState();
+		check_nfc_status();
 	}
 	@Override
 	public void onClick(View v) {
@@ -76,6 +84,15 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(intent1);
 			break;
 			
+case R.id.button_nfc:
+			
+	enable_nfc();
+	if (nfcstatus) {
+		Intent intent11=new Intent(MainActivity.this,NFC.class);
+		startActivity(intent11);
+	
+	}
+			break;
 		default:
 			break;
 		}
@@ -122,7 +139,38 @@ public class MainActivity extends Activity implements OnClickListener {
 	      }
 	   }
 	
-	
+	public void check_nfc_status() {
+		if (mNfcAdapter == null)
+        {
+            Toast.makeText(getApplicationContext(), "No NFC availability in this device", Toast.LENGTH_SHORT).show();
+        }
+        else if (mNfcAdapter != null)
+        {
+            if (mNfcAdapter.isEnabled() == false)
+            {
+                Toast.makeText(getApplicationContext(), "Please Switch on NFC", Toast.LENGTH_SHORT).show();
+                button_nfc.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.btn_nfc, 0, 0);
+                nfcstatus=false;
+            } else
+            {
+            	button_nfc.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.btn_nfc_runtime, 0, 0);
+            	nfcstatus=true;
+            }
+        }
+	}
+	public void enable_nfc() {
+		if (mNfcAdapter.isEnabled() == false)
+        {
+			Toast.makeText(getApplicationContext(), "Please Switch on NFC", Toast.LENGTH_SHORT).show();
+			Intent intentOpenNFCSettings = new Intent();
+			intentOpenNFCSettings.setAction(Settings.ACTION_NFC_SETTINGS); //opens the NFC Settings
+            startActivity(intentOpenNFCSettings);
+            button_nfc.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.btn_nfc_runtime, 0, 0);
+            check_nfc_status();
+        }else{
+    		check_nfc_status();
+    	}
+	}
 	//check the wifi enabling state
 	public void checkWifiState(){
 		WifiManager wifi = (WifiManager)getSystemService(Context.WIFI_SERVICE);
@@ -130,6 +178,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			button_wifi.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.btn_wifi_runtime, 0, 0);
 		}else{
 			button_wifi.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.btn_wifi, 0, 0);
+			
 		}
 	}
 	

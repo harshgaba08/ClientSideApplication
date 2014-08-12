@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+     	android:oneshot="false">
+
+<item android:drawable="@drawable/touch_white" android:duration="210" />
+<item android:drawable="@drawable/touch_blue" android:duration="210" />
+<item android:drawable="@drawable/touch" android:duration="210" />
+    <item android:drawable="@drawable/touch_white" android:duration="210" />
+    
+    <item android:drawable="@drawable/touch_blue" android:duration="210" />
+
+    
+	
+	
+</animation-list>

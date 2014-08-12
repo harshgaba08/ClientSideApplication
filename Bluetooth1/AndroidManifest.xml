@@ -13,7 +13,7 @@
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
   <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-  
+  <uses-permission android:name="android.permission.NFC"></uses-permission>
   
  
     <application
@@ -43,6 +43,17 @@
          <activity android:name="com.weexcel.bluetooth.wifi"
             android:screenOrientation="portrait"
             android:theme="@style/Splash_theme"></activity>
+         
+         
+         <activity android:name="com.weexcel.bluetooth.NFC"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash_theme">
+             <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+         </activity>
         
     </application>
 
