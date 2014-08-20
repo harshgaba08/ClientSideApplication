@@ -80,7 +80,7 @@ public boolean nfcstatus;
 		case R.id.button_wifi:
 			
 			enablewifi();
-			Intent intent1=new Intent(MainActivity.this,wifi.class);
+			Intent intent1=new Intent(MainActivity.this,WiFiDirectActivity.class);
 			startActivity(intent1);
 			break;
 			
