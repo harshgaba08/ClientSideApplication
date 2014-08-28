@@ -12,10 +12,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.net.wifi.WpsInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
@@ -28,8 +30,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 
 
@@ -52,31 +56,35 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContentView = inflater.inflate(R.layout.device_detail, null);
-        
+      final EditText clientmsg=(EditText) mContentView.findViewById(R.id.edit_client_msg);
+      
         mContentView.findViewById(R.id.btn_connect).setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
             	// Disconnect the connection automatically after 15 seconds.
-            	try{
-            	Timer timer=new Timer();
-                timer.schedule(new TimerTask() {
-               	  @Override
-               	  public void run() {
-               	    // Your database code here
-               	    getActivity().runOnUiThread(new Runnable() {
-						
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							((DeviceActionListener) getActivity()).disconnect();
-							Toast.makeText(getActivity(), "CONNECTION TO SERVER DISCONNECTED AUTOMATICALLY",Toast.LENGTH_SHORT).show();
-						}
-					});
-               	  }
-               	}, 15000);
-            	}catch(Exception e){}
+//            	try{
+//            	Timer timer=new Timer();
+//                timer.schedule(new TimerTask() {
+//               	  @Override
+//               	  public void run() {
+//               	    // Your database code here
+//               	    getActivity().runOnUiThread(new Runnable() {
+//						
+//						@Override
+//						public void run() {
+//							// TODO Auto-generated method stub
+//							((DeviceActionListener) getActivity()).disconnect();
+//							Toast.makeText(getActivity(), "CONNECTION TO SERVER DISCONNECTED AUTOMATICALLY",Toast.LENGTH_SHORT).show();
+//						}
+//					});
+//               	  }
+//               	}, 15000);
+//            	}catch(Exception e){}
             	//makes the connection request
+        if(clientmsg.getText().toString().isEmpty()){
+            		Toast.makeText(getActivity(), "Please enter the message", Toast.LENGTH_SHORT).show();
+            	}else{
+            		aaharsh+="/"+clientmsg.getText();
                 WifiP2pConfig config = new WifiP2pConfig();
                 config.deviceAddress = device.deviceAddress;
                 config.wps.setup = WpsInfo.PBC;
@@ -94,20 +102,35 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 //                        }
                         );
                 ((DeviceActionListener) getActivity()).connect(config);
-
+            	}
             }
         });
-
+       
         // makes a Disconnect Request
         mContentView.findViewById(R.id.btn_disconnect).setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
+                    	 mContentView.findViewById(R.id.btn_sendimage).setVisibility(View.GONE);
+                    	 mContentView.findViewById(R.id.edit_client_msg).setVisibility(View.VISIBLE);
+                    	 mContentView.findViewById(R.id.textview1).setVisibility(View.VISIBLE);
                         ((DeviceActionListener) getActivity()).disconnect();
+                        
                     }
                 });
 
+        mContentView.findViewById(R.id.btn_sendimage).setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                    	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        intent.setType("image/*");
+                        startActivityForResult(intent, CHOOSE_FILE_RESULT_CODE);
+                    }
+                });
+        
 //        
         return mContentView;
     }
@@ -126,10 +149,24 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+    				
+		if (resultCode==Activity.RESULT_OK) {
+			
+		
+    	Uri uri = data.getData();
+//        TextView statusText = (TextView) mContentView.findViewById(R.id.status_text);
+//        statusText.setText("Sending: " + uri);
+        Log.e(WiFiDirectActivity.TAG, "Intent----------- " + uri);
+        Intent serviceIntent = new Intent(getActivity(), SendImageService.class);
+        serviceIntent.setAction(FileTransferService.ACTION_SEND_FILE);
+        serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH, uri.toString());
+        serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_ADDRESS,
+                info.groupOwnerAddress.getHostAddress());
+        serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_PORT, 8988);
+        getActivity().startService(serviceIntent);
 //        ignore for now
     }
-
+    }
     @Override
     public void onConnectionInfoAvailable(final WifiP2pInfo infoz) {
         if (progressDialog != null && progressDialog.isShowing()) {
@@ -162,11 +199,14 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
            
         } else if (info.groupFormed) {
 //          ignore for now
+        	 mContentView.findViewById(R.id.btn_sendimage).setVisibility(View.VISIBLE);
         }
 
         // hide the connect button
         harsh();
         mContentView.findViewById(R.id.btn_connect).setVisibility(View.GONE);
+        mContentView.findViewById(R.id.edit_client_msg).setVisibility(View.GONE);
+        mContentView.findViewById(R.id.textview1).setVisibility(View.GONE);
     }
 
     /**

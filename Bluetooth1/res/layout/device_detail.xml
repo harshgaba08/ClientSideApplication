@@ -23,6 +23,25 @@
             android:textSize="30dp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/textview1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_serverside"
+            android:layout_marginTop="10dp"
+            android:background="#141f4c"
+            android:text="Client's Message"
+            android:textColor="#ffffff"
+            android:textSize="18dp" />
+        
+        <EditText android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_client_msg"
+            android:ems="10"
+            android:background="#ffffff"
+            android:inputType="textPersonName"
+            android:textColor="#141f4c"
+            android:hint="Please Enter Message"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +57,8 @@
                 android:background="#00000000"
                 android:drawableTop="@drawable/btn_connect"
                 android:text="@string/connect_peer_button"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff" 
+                />
 
             <Button
                 android:id="@+id/btn_disconnect"
@@ -49,6 +69,17 @@
                 android:drawableTop="@drawable/btn_disconnect"
                 android:text="@string/disconnect_peer_button"
                 android:textColor="#ffffff" />
+            
+            <Button
+                android:id="@+id/btn_sendimage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:drawableTop="@drawable/btn_sendimage"
+                android:text="@string/send_image_button"
+                android:textColor="#ffffff"
+              android:visibility="gone"   />
         </LinearLayout>
 
         <TextView
